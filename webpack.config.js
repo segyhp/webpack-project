@@ -1,13 +1,29 @@
 module.exports = {
-    entry:  [
-        './src/index.js',
-    ],
-    output: {
-        path: __dirname + '/dist ',
-        publicPath: '/',
-        filename: 'bundle.js'
+  entry: [
+    './src/index.js',
+  ],
+  output: {
+    path: `${__dirname}/dist`,
+    publicPath: '/',
+    filename: 'bundle.js',
+  },
+  devServer: {
+    contentBase: './dist',
+  },
+  module: {
+    rules: [{
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      use: ['babel-loader'],
     },
-    devServer: {
-        contentBase: './dist'
-    }
-}
+    {
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      use: ['eslint-loader'],
+    },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', 'j.sx'],
+  },
+};
